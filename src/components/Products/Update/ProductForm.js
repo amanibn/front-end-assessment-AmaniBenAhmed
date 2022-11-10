@@ -115,7 +115,7 @@ const ProductForm = (props) => {
                 />
             </FormGroup>
             <FormGroup check>
-                {/* Since we  */}
+                {/* As the Featured state depends on the rating value, I disabled the checkbox. */}
                 <Label check>
                     <Input type="checkbox" checked={featured}
                         disabled
