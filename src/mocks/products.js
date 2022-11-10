@@ -12,7 +12,7 @@ let products = [
     createdAt: '2019-04-30T16:00:40+03:00',
   },
   {
-    id: '2',
+    id: 2,
     name: 'iPhone',
     rating: 2,
     featured: false,
@@ -24,7 +24,7 @@ let products = [
     createdAt: '2019-05-14T16:00:40+03:00',
   },
   {
-    id: '3',
+    id: 3,
     name: 'laptop',
     rating: 5,
     featured: false,
