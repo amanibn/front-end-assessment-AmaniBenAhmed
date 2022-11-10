@@ -14,7 +14,8 @@ export function products(state = [], action) {
       return state.filter((item) => item.id !== action.productId);
     case productsActions.UPDATE_PRODUCT:
       return state.map((item) => {
-        if (item.id === action.productId) {
+        if (item.id == action.productId) {
+         
           return {
             ...item,
             ...action.data,
@@ -36,5 +37,5 @@ export function products(state = [], action) {
 }
 
 export function getProductById({products}, productId) {
-  return products.find(({id}) => id === productId);
+  return products.find(({id}) => id == productId);
 }

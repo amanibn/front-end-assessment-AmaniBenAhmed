@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Form, FormFeedback, FormGroup, Input, Label} from 'reactstrap';
 import {getMultiSelected, repeat} from '../../../utils';
-import {isCategoriesValid, isNameValid} from './validators';
+import {isCategoriesValid, isNameValid, isExpirationDateValid} from './validators';
 
 const ProductForm = (props) => {
     const {product = {}} = props;
@@ -13,7 +13,7 @@ const ProductForm = (props) => {
     const [itemsInStock, setItemsInStock] = useState(product.itemsInStock || 0);
     const [receiptDate, setReceiptDate] = useState(product.receiptDate || '');
     const [expirationDate, setExpirationDate] = useState(product.expirationDate || '');
-    const [featured, setFeatured] = useState(product.featured);
+    const [featured, setFeatured] = useState(product.featured || false);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -62,7 +62,10 @@ const ProductForm = (props) => {
                     name="rating"
                     id="rating"
                     value={rating}
-                    onChange={({target}) => setRating(target.value)}
+                    onChange={({target}) => {
+                        setRating(target.value)
+                        setFeatured(target.value >8 )
+                    }}
                 >
                     {repeat(11).map((v) => (
                         <option key={v} value={v}>{v}</option>
@@ -95,6 +98,7 @@ const ProductForm = (props) => {
             <FormGroup>
                 <Label for="expirationDate">Expiration date</Label>
                 <Input
+                invalid={!isExpirationDateValid(expirationDate)}
                     type="date"
                     name="expirationDate"
                     id="expirationDate"
@@ -111,9 +115,11 @@ const ProductForm = (props) => {
                 />
             </FormGroup>
             <FormGroup check>
+                {/* Since we  */}
                 <Label check>
                     <Input type="checkbox" checked={featured}
-                           onChange={({target}) => setFeatured(target.checked)}
+                        disabled
+                        onChange={({target}) => setFeatured(target.checked)}
                     />{' '}
                     Featured
                 </Label>

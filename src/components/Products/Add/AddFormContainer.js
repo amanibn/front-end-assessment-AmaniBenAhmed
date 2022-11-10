@@ -8,12 +8,12 @@ import {createProductForm} from '../../../actions/products';
 class AddFormContainer extends Component {
     render() {
         const {categories, dispatch} = this.props;
-
+  
         return (
             <>
                 <Link to='/'>Home</Link>
                 <ProductForm
-                    onSave={(data) => {return;}}
+                   onSave={(data) => {dispatch(createProductForm(data));}}
                     categories={categories}
                 />
             </>
@@ -27,7 +27,7 @@ AddFormContainer.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories,
+        categories: state.categories
     }
 };
 

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {getProductById} from '../../../reducers/products';
 import ProductForm from './ProductForm';
 import {Link} from 'react-router-dom';
 import {updateProductForm} from '../../../actions/products';
+import { useParams } from 'react-router-dom';
 
-class UpdateFormContainer extends Component {
-    render() {
-        const {product, categories, dispatch} = this.props;
-
+  const UpdateFormContainer = (props)=>{
+        const {product, categories, dispatch} = props;
+        let { productId } = useParams();
         if (!product) {
             return null;
         }
@@ -18,13 +18,12 @@ class UpdateFormContainer extends Component {
             <>
                 <Link to='/'>Home</Link>
                 <ProductForm
-                    onSave={(data) => {return}}
+                    onSave={(data) => {dispatch(updateProductForm(productId, data))}}
                     product={product}
                     categories={categories}
                 />
             </>
         );
-    }
 }
 
 UpdateFormContainer.propTypes = {
